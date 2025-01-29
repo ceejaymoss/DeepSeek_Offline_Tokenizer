@@ -22,3 +22,8 @@ print(f"Encoded tokens: {result}")
 print(f"Token count: {token_count}")
 print(f"Cache hit cost (USD): ${token_cost_cache_hit:.6f}")
 print(f"Cache miss cost (USD): ${token_cost_cache_miss:.6f}")
+
+# Optional: Show cost per million tokens
+print(f"\nCost per million tokens:")
+print(f"Cache hit: ${one_mill_tokens_output * cache_hit_multi:.6f}")
+print(f"Cache miss: ${one_mill_tokens_output * cache_miss_multi:.6f}")
