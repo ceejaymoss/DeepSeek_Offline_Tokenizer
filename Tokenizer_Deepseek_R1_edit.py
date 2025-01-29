@@ -1,5 +1,9 @@
 from transformers import AutoTokenizer
 
+cache_hit_multi = 0.14
+cache_miss_multi = 0.55
+one_mill_tokens_output = 2.19
+
 # Load the DeepSeek tokenizer
 tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/deepseek-r1", trust_remote_code=True)
 
@@ -10,5 +14,11 @@ text = "1 INTRODUCTION When the total of some entity, its quantity, is known to 
 result = tokenizer.encode(text)
 token_count = len(result)
 
+# Calculate costs
+token_cost_cache_hit = (token_count * one_mill_tokens_output * cache_hit_multi) / 1_000_000
+token_cost_cache_miss = (token_count * one_mill_tokens_output * cache_miss_multi) / 1_000_000
+
 print(f"Encoded tokens: {result}")
 print(f"Token count: {token_count}")
+print(f"Cache hit cost (USD): ${token_cost_cache_hit:.6f}")
+print(f"Cache miss cost (USD): ${token_cost_cache_miss:.6f}")
